@@ -1,0 +1,82 @@
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+<script>
+
+$(function() {
+    $("#contact-form").submit(function(e){
+	  e.preventDefault();
+	  var action = $(this).attr("action");
+	  var data = {};
+	  $(this).serializeArray().map(function(x){data[x.name] = x.value;});
+	  $.ajax({
+		type: "POST",
+		url: action,
+		data: JSON.stringify(data),
+		contentType: "application/json",
+		headers: {
+		  "Accept": "application/json"
+		}
+	  }).done(function() {
+		 $("#contact-form").find(".messages").html("<div class='alert aler-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Your message was sent, thank you. we will get back to you soon.</div>");
+	  }).fail(function() {
+		 $("#contact-form").find(".messages").html("<div class='alert aler-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Something went wrong, Try again later.</div>");
+	  });
+	}); 
+})
+
+</script>
+
+
+<section>
+  <div>
+    <div class="row">
+      <div class="col-md-6">
+          <h3>To make requests for
+further information,
+contact us via our social channels.</h3></br>
+We just need a couple of hours! No more than 2 working days since receiving your issue ticket
+      </div>
+	  <div class="col-md-6">
+	  <div class="messages"></div>
+            <form accept-charset="UTF-8" action="https://getform.io/f/6c3602d8-0d03-4981-a7b7-718815a36399" method="POST" id="contact-form">
+			  <div class="row">
+				<div class="col-md-12">
+				  <div class="form-group">
+					<input type="text" name="name" class="form-control" placeholder="Please enter your name *" required="required" data-error="Name is required.">
+					<input type="email" name="email" class="form-control" placeholder="Please enter your email *" required="required" data-error="Valid email is required.">
+					<input type="tel" name="phone" class="form-control" placeholder="Please enter your phone">
+					<textarea name="message" class="form-control" placeholder="Message for me *" rows="4" required="required" data-error="Please,leave us a message."></textarea>
+					<button type="submit" class="btn btn-primary">Send</button>
+				  </div>
+				</div>
+			  </div>
+          <div class="row">
+            <div class="col-md-12">
+              <p class="text-muted"><strong>*</strong> These fields are required.</p>
+            </div>
+          </div>
+
+        </form>
+        </center>
+	  </div>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top:30px;">
+<div class="row">
+<div class="col-md-4" style="border:1px solid #ced4da; padding: 10px;">
+<center>
+  <h2><b>Head Office</b></h2>
+  <p class="mb-0"><b>Address:</b> House 45 (8th Floor)
+  Road 07, Sector 04, Uttara Model Town, Dhaka 1230.</p>
+  <p class="mb-0"><b>Mobile:</b> 01700800580</p>
+  <p class="mb-0"><b>Email:</b> info@parcelwala.com.bd</p>
+</center>
+</div>
+<div class="col-md-4"></div>
+<div class="col-md-4"></div>
+</div>
+</section>
+
+
