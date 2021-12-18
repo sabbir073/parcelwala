@@ -1,0 +1,123 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        .success {
+         display: none;
+         background: #e1f8ed;
+         padding: 20px;
+         margin-top: 16px;
+         margin-bottom: 16px;
+        }
+        .success.is-active {
+            display: block;
+        }
+       
+    </style>
+
+<script>
+    $(document).ready(function (){
+        
+        $('#btnsubmit').click(function(event){
+            event.preventDefault();
+            var	name = $('#name').val();
+            var	phone = $('#phone').val();
+            var	dob = $('#dob').val();
+            var	address = $('#address').val();
+            var	documents = $('#nidbc').val();
+            var	vehicle = $('#vehicle').val();
+            var	area = $('#area').val();
+
+            if(name && phone && dob && address && documents && vehicle && area){
+                $.ajax({
+                type: "POST",
+                url: "https://getform.io/f/742de8b1-6acf-495e-818e-f1a37f6707d0",
+                data: { Name:name, Mobile:phone, Date_of_birth:dob, Address:address, Document:documents, Vehicle:vehicle, Area:area },
+                }).done(function() {
+                    $('.success').addClass('is-active');
+                    $("#ajaxForm")[0].reset();
+                }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("Status: " + textStatus); alert("Error: " + errorThrown);
+                });
+            }
+            else{
+                alert("Please fill the required field.");
+            }
+
+        });
+
+        $.get("https://parcelwala.com.bd/shipments/ajaxed-get-areas?state_id=" + 771, function(data) {
+                    $('#area').empty();
+                    for (let index = 0; index < data.length; index++) {
+                        const element = data[index];
+
+                        $('#area').append('<option value="' + element['name'] + '">' + element['name'] + '</option>');
+                    }
+        });
+    });
+    
+</script>
+
+<center><h2 class="bottom30 darkcolor font-normal ">Download Rider App</h2></center>
+<div class="row d-flex align-items-center">
+    <div class="col-md-12 text-center">
+        <div class="flex social-btns" style="margin-top:20px;">
+            <a class="app-btn blu flex vert" href="https://play.google.com/store/apps/details?id=com.stitbd.parcelwalarider">
+            <i class="fab fa-google-play"></i>
+            <p>Get it on <br> <span class="big-txt">Google Play</span></p>
+            </a>
+            <a class="app-btn blu flex vert" href="#">
+            <i class="fab fa-apple"></i>
+            <p>Get it on <br> <span class="big-txt">App Store</span></p>
+            </a>
+        
+            
+        </div>
+    </div>
+</div>
+<center><h2 class="bottom30 top30 darkcolor font-normal ">Fill The Form & Become a Rider</h2></center>
+
+<section style="margin-top:50px;">
+    <div class="row"  style="margin:0;">
+        <div class="col-md-10 offset-md-1">
+        <form accept-charset="UTF-8" id="ajaxForm">
+            <div class="form-group">
+                <input id="name" type="text" name="name" class="form-control" placeholder="Enter Your Full Name*" required="required">
+            </div>
+            <div class="form-group">
+                <input id="phone" type="tel" name="phone" class="form-control" placeholder="Enter your Mobile Number*" required="required">
+            </div>
+            <div class="form-group">
+                <input placeholder="Enter your Date of Birth*" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="dob" name="dob" required="required" />
+            </div>
+            <div class="form-group">
+                <textarea id="address" name="address" class="form-control" placeholder="Enter Your Address*" rows="2" required="required"></textarea>
+            </div>
+            <div class="form-group">
+                <h6 style="font-weight: 100;">Which of the following documents do you have?*</h6>        
+                    <select name="nidbc" class="form-control" id="nidbc" required="required">
+                    <option selected>Choose...</option>
+                    <option value="NID">NID</option>
+                    <option value="Birth Certificate">Birth Certificate</option>
+                    </select>
+            </div>
+            <div class="form-group">
+                <h6 style="font-weight: 100;">Which kind of vehicle do you have?*</h6>        
+                    <select name="vehicle" class="form-control" id="vehicle" required="required">
+                    <option selected>Choose...</option>
+                    <option value="Motorbike">Motorbike</option>
+                    <option value="Bicycle">Bicycle</option>
+                    </select>
+            </div>
+            <div class="form-group">
+                <select id="area" name="area" class="form-control" required="required">
+                                    
+                </select>
+                
+            </div>
+            <div class="success">We received your submission, thank you!</div> 
+            <button id="btnsubmit" type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+    </section>
