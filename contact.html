@@ -1,125 +1,148 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+    .success {
+     display: none;
+     background: #e1f8ed;
+     padding: 20px;
+     margin-top: 16px;
+     margin-bottom: 16px;
+    }
+    .success.is-active {
+        display: block;
+    }
+    .droppad{
+      
+      border:1px solid #ced4da;
+      padding: 20px;
+      background-color: #026cb8;
+      color:#ffffff;
+      margin-right: auto;
+      border-radius: 10px;
+    }
+    .droppad h3{
+      color:#ff7324;
+      margin-bottom: 15px;
+    }
+    .droppadd{
+      border:1px solid #ced4da;
+      padding: 20px;
+      background-color: #ff7324;
+      color:#ffffff;
+      margin-right: auto;
+      border-radius: 10px;
+    }
+    .droppadd h3{
+      margin-bottom: 15px;
+    }
+    .lolfont{
+      font-family: "Open Sans";
+    }
+   
+</style>
 
-    <style>
-        .success {
-         display: none;
-         background: #e1f8ed;
-         padding: 20px;
-         margin-top: 16px;
-         margin-bottom: 16px;
-        }
-        .success.is-active {
-            display: block;
-        }
-        .droppad{
-          border:1px solid #ced4da;
-          padding: 20px;
-          background-color: #026cb8;
-          color:#ffffff;
-          margin-right: auto;
-        }
-       
-    </style>
-
-    <script>
-        $(document).ready(function (){
-            
-            $('#btnsub').click(function(event){
-                event.preventDefault();
-                var	name = $('#name').val();
-                var	email = $('#email').val();
-                var	phone = $('#phone').val();
-                var	message = $('#message').val();
-
-                if(name && email){
-                    $.ajax({
-                    type: "POST",
-                    url: "https://getform.io/f/6c3602d8-0d03-4981-a7b7-718815a36399",
-                    data: { name:name, email:email, phone:phone, message:message },
-                    }).done(function() {
-                        $('.success').addClass('is-active');
-                        $("#ajaxForm")[0].reset();
-                    }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
-                        alert("Status: " + textStatus); alert("Error: " + errorThrown);
-                    });
-                }
-                else{
-                    alert("Please fill the required field.");
-                }
-
-		    });
-        });
+<script>
+    $(document).ready(function (){
         
-    </script>
+        $('#btnsub').click(function(event){
+            event.preventDefault();
+            var	name = $('#name').val();
+            var	email = $('#email').val();
+            var	phone = $('#phone').val();
+            var	message = $('#message').val();
 
-<section style="margin-top:50px;">
-  <div class="row"  style="margin:0;">
-    <div class="col-md-10 offset-md-1">
-        <div class="row">
-            <div class="col-md-6 align-self-center mb-5">
-                <h3>To make requests for
-      further information,
-      contact us via our social channels.</h3></br>
-      We just need a couple of hours! No more than 2 working days since receiving your issue ticket
+            if(name && email){
+                $.ajax({
+                type: "POST",
+                url: "https://getform.io/f/6c3602d8-0d03-4981-a7b7-718815a36399",
+                data: { name:name, email:email, phone:phone, message:message },
+                }).done(function() {
+                    $('.success').addClass('is-active');
+                    $("#ajaxForm")[0].reset();
+                }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("Status: " + textStatus); alert("Error: " + errorThrown);
+                });
+            }
+            else{
+                alert("Please fill the required field.");
+            }
+
+    });
+    });
+    
+</script>
+
+<section style="margin-top: 17px;">
+<div class="row"  style="margin:0;">
+<div class="col-md-10 offset-md-1">
+    <div class="row">
+        <div class="col-md-6 align-self-center mb-5">
+            <h3>To make requests for
+  further information,
+  contact us via our social channels.</h3></br>
+  <p>We just need a couple of hours! No more than 2 working days since receiving your issue ticket</p>
+  
+        </div>
+        <div class="col-md-6">
+
+          <form accept-charset="UTF-8" id="ajaxForm">
+      
+            <div class="form-group">
+              <input id="name" type="text" name="name" class="form-control" placeholder="Enter Your Name*" required="required">
             </div>
-            <div class="col-md-6">
-
-              <form accept-charset="UTF-8" id="ajaxForm">
-          
-                <div class="form-group">
-                  <input id="name" type="text" name="name" class="form-control" placeholder="Enter Your Name*" required="required">
-                </div>
-                <div class="form-group">
-                  <input id="email" type="email" name="email" class="form-control" placeholder="Enter your Email*" required="required">
-                </div>
-                <div class="form-group">
-                    <input id="phone" type="tel" name="phone" class="form-control" placeholder="Enter your Mobile Number">
-                </div>
-                <div class="form-group">
-                    <textarea id="message" name="message" class="form-control" placeholder="Message for us" rows="4"></textarea>
-                </div>
-                <div class="success">We received your submission, thank you!</div> 
-                <button id="btnsub" type="submit" class="btn btn-primary">Submit</button>
-              </form>
-
+            <div class="form-group">
+              <input id="email" type="email" name="email" class="form-control" placeholder="Enter your Email*" required="required">
             </div>
-          </div>
-    </div>
-  </div>
+            <div class="form-group">
+                <input id="phone" type="tel" name="phone" class="form-control" placeholder="Enter your Mobile Number">
+            </div>
+            <div class="form-group">
+                <textarea id="message" name="message" class="form-control" placeholder="Message for us" rows="4"></textarea>
+            </div>
+            <div class="success">We received your submission, thank you!</div> 
+            <button id="btnsub" type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Send</button>
+          </form>
+
+        </div>
+      </div>
+</div>
+</div>
 </section>
 
-<section style="margin-top:30px;">
+<section style="margin-top:30px; margin-bottom: 17px;">
 <div class="row" style="margin:0;">
-  <div class="col-md-4">
-    <div class="droppad">
-      <center>
-        <h3><b>Head Office</b></h3>
-        <p class="mb-0"><b>Address:</b> House 45 (8th Floor)
-        Road 07, Sector 04, Uttara Model Town, Dhaka 1230.</p>
-        <p class="mb-0"><b>Mobile:</b> 01700800580</p>
-        <p class="mb-0"><b>Email:</b> info@parcelwala.com.bd</p>
-      </center>
-    </div>
-    </div>
 <div class="col-md-4">
-  <div class="droppad">
-    <center>
-      <h3><b>Branch Office</b></h3>
-      <p class="mb-0"><b>Address:</b> House 20, Lane 1, Block B, Mirpur 13, Dhaka 1216.</p>
-      <p class="mb-0"><b>Mobile:</b></p>
-      <p class="mb-0"><b>Email:</b> </p>
-    </center>
-  </div>
-  </div>
-  <div class="col-md-4">
-    <div class="droppad">
-      <center>
-        <h3><b>Branch Office</b></h3>
-        <p class="mb-0"><b>Address:</b> </p>
-        <p class="mb-0"><b>Mobile:</b> </p>
-        <p class="mb-0"><b>Email:</b> </p>
-      </center>
-    </div>
-    </div>
+<div class="droppad">
+  <center>
+    <h3><b>BRANCH OFFICE</b></h3>
+    <p class="mb-0 lolfont"><b>Address:</b> House 20, Lane 1, Block B, </br>Mirpur 13, Dhaka 1216.</p>
+    <p class="mb-0 lolfont"><b>Mobile:</b> +8801700800580</p>
+    <p class="mb-0 lolfont"><b>Email:</b> br1@parcelwala.com.bd</p>
+  </center>
+</div>
+</div>
+<div class="col-md-4">
+<div class="droppadd">
+<center>
+  <h3><b>HEAD OFFICE</b></h3>
+  <p class="mb-0 lolfont"><b>Address:</b> House 45 (8F)
+    Road 07, </br>Sector 04, Uttara, Dhaka 1230.</p>
+  <p class="mb-0 lolfont"><b>Mobile:</b> 01700800580</p>
+  <p class="mb-0 lolfont"><b>Email:</b> info@parcelwala.com.bd</p>
+</center>
+</div>
+</div>
+<div class="col-md-4">
+<div class="droppad">
+  <center>
+    <h3><b>BRANCH OFFICE</b></h3>
+  <p class="mb-0 lolfont"><b>Address:</b> House 45 (8F)
+    Road 07, </br>Sector 04, Uttara, Dhaka 1230.</p>
+  <p class="mb-0 lolfont"><b>Mobile:</b> 01700800580</p>
+  <p class="mb-0 lolfont"><b>Email:</b> info@parcelwala.com.bd</p>
+  </center>
+</div>
+</div>
 </div>
 </section>
